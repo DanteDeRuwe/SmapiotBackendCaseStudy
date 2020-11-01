@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using SmapiotCaseStudy.Application.Interfaces;
 
 namespace SmapiotCaseStudy.Api.Controllers
 {
@@ -8,9 +10,20 @@ namespace SmapiotCaseStudy.Api.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
-        public IActionResult Get()
+        private readonly IRequestsService _service;
+
+        public ReportController(IRequestsService service)
         {
-            return NoContent();
+            _service = service;
+        }
+        
+        public async Task<IActionResult> Get(int year, int month, string subscription)
+        {
+            var requests = await _service.GetBy(year, month);
+            
+            
+            
+            return NoContent(); //TODO temp
         }
     }
 }

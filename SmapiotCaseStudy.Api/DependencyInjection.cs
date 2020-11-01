@@ -1,4 +1,3 @@
-﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace SmapiotCaseStudy.Api
@@ -7,9 +6,12 @@ namespace SmapiotCaseStudy.Api
     {
         public static void AddApi(this IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             services.AddRouting(options => options.LowercaseUrls = true);
-            
+
             services.AddOpenApiDocument(s =>
             {
                 s.DocumentName = "apidocs";
