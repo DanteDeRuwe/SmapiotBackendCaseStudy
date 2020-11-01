@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
@@ -30,9 +31,10 @@ namespace SmapiotCaseStudy.Infrastructure.Services
             return requestResponse.Requests;
         }
 
-        public Task<IList<Request>> GetBy(int year, int month, string subscription)
+        public async Task<IList<Request>> GetBy(int year, int month, string subscription)
         {
-            throw new NotImplementedException();
+            var requests = await GetBy(year, month);
+            return requests.Where(r => r.SubscriptionId.Equals(Guid.Parse(subscription))).ToList();
         }
     }
 
