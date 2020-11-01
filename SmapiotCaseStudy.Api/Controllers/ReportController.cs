@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SmapiotCaseStudy.Controllers
+namespace SmapiotCaseStudy.Api.Controllers
 {
+    [ApiConventionType(typeof(DefaultApiConventions))]
+    [Produces("application/json")]
+    [Route("api/[controller]")]
+    [ApiController]
     public class ReportController : ControllerBase
     {
-        // GET
-        public IActionResult Index()
+        public IActionResult Get()
         {
-            return View();
+            return NoContent();
         }
     }
 }
