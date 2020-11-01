@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmapiotCaseStudy", "SmapiotCaseStudy\SmapiotCaseStudy.csproj", "{569FCFED-EC4E-4CCF-8084-F44F16CD3DAE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{569FCFED-EC4E-4CCF-8084-F44F16CD3DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{569FCFED-EC4E-4CCF-8084-F44F16CD3DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{569FCFED-EC4E-4CCF-8084-F44F16CD3DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{569FCFED-EC4E-4CCF-8084-F44F16CD3DAE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
