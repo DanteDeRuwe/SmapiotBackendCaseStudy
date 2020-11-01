@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SmapiotCaseStudy.Application.Interfaces;
-using SmapiotCaseStudy.Core.Models;
+using SmapiotCaseStudy.Application.Mappers;
 
 namespace SmapiotCaseStudy.Api.Controllers
 {
@@ -14,25 +14,18 @@ namespace SmapiotCaseStudy.Api.Controllers
     public class ReportController : ControllerBase
     {
         private readonly IRequestsService _service;
+        private readonly IConfiguration _configuration;
 
-        public ReportController(IRequestsService service)
+        public ReportController(IRequestsService service, IConfiguration configuration)
         {
             _service = service;
+            _configuration = configuration;
         }
         
         public async Task<IActionResult> Get(int year, int month, string subscription)
         {
             var requests = await _service.GetBy(year, month, subscription);
-            var report = new Report
-            {
-                StartDate = requests.Min(r => r.Requested),
-                EndDate = requests.Max(r => r.Requested),
-                SubscriptionId = Guid.Parse(subscription),
-                NumberOfRequests = requests.Count(),
-                PriceReport =
-                    requests.GroupBy(r => r.ServiceName)
-                        .ToDictionary(g => g.Key, g => g.Count() * 1.00) //TODO price per service
-            };
+            var report = new ReportMapper(_configuration).FromRequests(requests, Guid.Parse(subscription));
 
             return Ok(report);
         }
