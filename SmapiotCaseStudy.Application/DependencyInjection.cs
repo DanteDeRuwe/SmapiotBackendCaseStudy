@@ -8,6 +8,7 @@ namespace SmapiotCaseStudy.Application
         public static void AddApplication(this IServiceCollection services)
         {
             services.AddTransient<IReporter, Reporter>();
+            services.AddTransient<IPriceReporter, PriceReporter>();
         }
     }
 }

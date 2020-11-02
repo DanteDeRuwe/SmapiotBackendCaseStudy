@@ -10,10 +10,12 @@ namespace SmapiotCaseStudy.Application
     public class Reporter :IReporter
     {
         private readonly IConfiguration _configuration;
+        private readonly IPriceReporter _priceReporter;
 
-        public Reporter(IConfiguration configuration)
+        public Reporter(IConfiguration configuration, IPriceReporter priceReporter)
         {
             _configuration = configuration;
+            _priceReporter = priceReporter;
         }
 
         public Report CreateReportFromRequests(IList<Request> requests, Guid subscription)
@@ -24,10 +26,7 @@ namespace SmapiotCaseStudy.Application
                 EndDate = requests.Max(r => r.Requested),
                 SubscriptionId = subscription,
                 NumberOfRequests = requests.Count(),
-                PriceReport = requests.GroupBy(r => r.ServiceName).ToDictionary(
-                    g => g.Key,
-                    g => g.Count() * decimal.Parse(_configuration[$"servicePricing:{g.Key}"])
-                )
+                PriceReports = _priceReporter.CreatePriceReportsFromRequests(requests)
             };
         }
     }
