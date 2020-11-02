@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using SmapiotCaseStudy.Core.Models;
 
-namespace SmapiotCaseStudy.Application.Interfaces
+namespace SmapiotCaseStudy.Core.Interfaces
 {
     public interface IRequestsService
     {

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using SmapiotCaseStudy.Application.Interfaces;
-using SmapiotCaseStudy.Application.Mappers;
+using SmapiotCaseStudy.Application;
+using SmapiotCaseStudy.Core.Interfaces;
 
 namespace SmapiotCaseStudy.Api.Controllers
 {
@@ -13,19 +12,19 @@ namespace SmapiotCaseStudy.Api.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
-        private readonly IRequestsService _service;
-        private readonly IConfiguration _configuration;
+        private readonly IRequestsService _requestsService;
+        private readonly IReporter _reporter;
 
-        public ReportController(IRequestsService service, IConfiguration configuration)
+        public ReportController(IRequestsService requestsService, IReporter reporter)
         {
-            _service = service;
-            _configuration = configuration;
+            _requestsService = requestsService;
+            _reporter = reporter;
         }
         
         public async Task<IActionResult> Get(int year, int month, string subscription)
         {
-            var requests = await _service.GetBy(year, month, subscription);
-            var report = new ReportMapper(_configuration).FromRequests(requests, Guid.Parse(subscription));
+            var requests = await _requestsService.GetBy(year, month, subscription);
+            var report = _reporter.CreateReportFromRequests(requests, Guid.Parse(subscription));
 
             return Ok(report);
         }

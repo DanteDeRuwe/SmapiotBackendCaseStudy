@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SmapiotCaseStudy.Application.Interfaces;
+using SmapiotCaseStudy.Core.Interfaces;
 using SmapiotCaseStudy.Infrastructure.Services;
 
 namespace SmapiotCaseStudy.Infrastructure

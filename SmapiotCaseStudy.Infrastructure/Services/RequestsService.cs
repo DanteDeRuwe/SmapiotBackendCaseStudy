@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using SmapiotCaseStudy.Application.Interfaces;
+using SmapiotCaseStudy.Core.Interfaces;
 using SmapiotCaseStudy.Core.Models;
 
 namespace SmapiotCaseStudy.Infrastructure.Services
