@@ -7,6 +7,6 @@ namespace SmapiotCaseStudy.Core.Models
         public string ServiceName { get; set; }
         public int NumberOfRequests { get; set; }
         public decimal PricePerRequest { get; set; }
-        public decimal TotalPrice => NumberOfRequests * PricePerRequest;
+        public decimal TotalServicePrice => NumberOfRequests * PricePerRequest;
     }
 }
