@@ -31,10 +31,10 @@ namespace SmapiotCaseStudy.Infrastructure.Services
             return requestResponse.Requests;
         }
 
-        public async Task<IList<Request>> GetBy(int year, int month, string subscription)
+        public async Task<IList<Request>> GetBy(int year, int month, Guid subscription)
         {
             var requests = await GetBy(year, month);
-            return requests.Where(r => r.SubscriptionId.Equals(Guid.Parse(subscription))).ToList();
+            return requests.Where(r => r.SubscriptionId.Equals(subscription)).ToList();
         }
     }
 

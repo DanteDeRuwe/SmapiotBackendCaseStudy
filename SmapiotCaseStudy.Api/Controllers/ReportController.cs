@@ -22,8 +22,9 @@ namespace SmapiotCaseStudy.Api.Controllers
         
         public async Task<IActionResult> Get(int year, int month, string subscription)
         {
-            var requests = await _requestsService.GetBy(year, month, subscription);
-            var report = _reporter.CreateReportFromRequests(requests, Guid.Parse(subscription));
+            Guid subscriptionId = Guid.Parse(subscription);
+            var requests = await _requestsService.GetBy(year, month, subscriptionId);
+            var report = _reporter.CreateReportFromRequests(requests, subscriptionId);
 
             return Ok(report);
         }
