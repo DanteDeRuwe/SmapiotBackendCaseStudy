@@ -442,6 +442,6 @@ MigrationBackup/
 
 
 
-
+.idea/
 appsettings.json
 appsettings.Development.json
