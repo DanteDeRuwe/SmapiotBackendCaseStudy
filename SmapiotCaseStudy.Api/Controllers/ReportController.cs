@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SmapiotCaseStudy.Core.Interfaces;
@@ -24,8 +25,8 @@ namespace SmapiotCaseStudy.Api.Controllers
             _requestsService = requestsService;
             _reporter = reporter;
         }
-
-        public async Task<IActionResult> Get(int year, int month, string subscription)
+        
+        public async Task<ActionResult<Report>> Get(int year, int month, string subscription)
         {
             if (!Guid.TryParse(subscription, out Guid subscriptionId))
                 return BadRequest("please provide a valid subscription id format");
