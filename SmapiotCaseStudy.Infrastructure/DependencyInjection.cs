@@ -12,7 +12,7 @@ namespace SmapiotCaseStudy.Infrastructure
         {
             services.AddHttpClient(
                 "smapiotRequestDataCollector",
-                client => client.BaseAddress = new Uri(configuration["RequestDataCollectorBaseUrl"])
+                client => client.BaseAddress = new Uri(configuration.GetSection("RequestDataCollector:BaseUrl").Value)
             );
 
             services.AddTransient<IRequestsService, RequestsService>();

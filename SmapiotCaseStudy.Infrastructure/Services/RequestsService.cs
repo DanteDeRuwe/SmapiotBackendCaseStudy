@@ -18,7 +18,7 @@ namespace SmapiotCaseStudy.Infrastructure.Services
         public RequestsService(IHttpClientFactory clientFactory, IConfiguration configuration)
         {
             _client = clientFactory.CreateClient("smapiotRequestDataCollector");
-            _apiKey = configuration["RequestDataCollectorAPIKey"];
+            _apiKey = configuration.GetSection("RequestDataCollector:APIKey").Value;
         }
 
         public async Task<IList<Request>> GetBy(int year, int month)
