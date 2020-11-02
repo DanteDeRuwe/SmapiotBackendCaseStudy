@@ -30,7 +30,7 @@ namespace SmapiotCaseStudy.Api.Controllers
             if (!Guid.TryParse(subscription, out Guid subscriptionId))
                 return BadRequest("please provide a valid subscription id format");
 
-            IList<Request> requests = null;
+            IList<Request> requests;
 
             try
             {
@@ -40,14 +40,10 @@ namespace SmapiotCaseStudy.Api.Controllers
             {
                 return BadRequest("An error occured when trying to reach the request data collector: " + hre.Message);
             }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-            
-            if (requests == null || !requests.Any())
-                return NoContent();
+            catch (Exception) { return BadRequest(); }
 
+            if (requests == null || !requests.Any()) return NotFound("The provided subscription has no requests for the provided year and month");
+            
             var report = _reporter.CreateReportFromRequests(requests, subscriptionId);
 
             return Ok(report);

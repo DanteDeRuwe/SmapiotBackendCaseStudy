@@ -7,9 +7,7 @@ namespace SmapiotCaseStudy.Api
     {
         public static void AddApi(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers().AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            );
+            services.AddControllers();
 
             services.AddRouting(options => options.LowercaseUrls = true);
 
