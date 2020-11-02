@@ -24,9 +24,14 @@ namespace SmapiotCaseStudy.Infrastructure.Services
         public async Task<IList<Request>> GetBy(int year, int month)
         {
             var response = await _client.GetAsync($"{year}/{month}?code={_apiKey}");
-
-            response.EnsureSuccessStatusCode();
             string content = await response.Content.ReadAsStringAsync();
+            
+            if (!response.IsSuccessStatusCode)
+            {
+                var requestErrorResponse = JsonConvert.DeserializeObject<RequestErrorResponse>(content);
+                throw new HttpRequestException(requestErrorResponse.Message);
+            }
+
             var requestResponse = JsonConvert.DeserializeObject<RequestResponse>(content);
             return requestResponse.Requests;
         }
@@ -41,5 +46,10 @@ namespace SmapiotCaseStudy.Infrastructure.Services
     public class RequestResponse
     {
         public IList<Request> Requests;
+    }
+    
+    public class RequestErrorResponse
+    {
+        public string Message;
     }
 }
