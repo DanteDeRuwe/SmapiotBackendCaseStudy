@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SmapiotCaseStudy.Application;
 using SmapiotCaseStudy.Core.Interfaces;
 
 namespace SmapiotCaseStudy.Api.Controllers

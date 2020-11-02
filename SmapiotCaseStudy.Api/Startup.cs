@@ -21,7 +21,7 @@ namespace SmapiotCaseStudy.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication();
-            services.AddApi();
+            services.AddApi(Configuration);
             services.AddInfrastructure(Configuration);
         }
 
@@ -32,12 +32,13 @@ namespace SmapiotCaseStudy.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseHttpsRedirection();
             app.UseOpenApi();
             app.UseSwaggerUi3();
-            app.UseRouting();
-
+            app.UseRouting(); 
+            
+            app.UseCors("CORSPolicy");
             //app.UseAuthorization();
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
